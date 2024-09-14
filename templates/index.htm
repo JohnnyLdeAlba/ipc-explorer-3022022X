@@ -1,0 +1,441 @@
+<html>
+<head>
+    <title>IPC Explorer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.6 user-scalable=no" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+<style>
+
+.search-label
+{
+    margin-right: 8px;
+    font-weight: bold;
+    color: #ddddee; 
+}
+
+.control,
+.control:link,
+.control:hover,
+.control:link,
+.control:active
+{
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 16px;
+    background-color: #ccccdd;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #333344;
+}
+
+.control:active { background-color: #777788; }
+
+#ipc-search-textin,
+#ipc-search-textin:focus
+{
+    padding: 8px 16px;
+    border: 0px none transparent;
+    border-radius: 16px;
+    background-color: #ccccdd;
+  
+    font-size: 16px;
+    color: #333344;
+}
+
+#input-search-textin:focus
+{
+    background-color: #cc0000;
+}
+
+</style>
+
+</head>
+<body>
+<form>
+
+<!-- Navigation -->
+<div class="navigation">
+<div class="content">
+<div class="row-table">
+    <div class="width-20"><img class="ipc-logo" src="icons/ipc-logo.svg" /></div>
+    <div class="width-80 align-r">
+        <span class="search-label">Search by IPC ID</span>
+        <input id="ipc-search-textin" type="text" value="">
+    </div>
+</div>
+</div>
+</div>
+<!-- /Navigation -->
+
+<div class="container">
+<div id="ipc-explorer">
+<!-- Status -->
+<div class="panel-padding-bottom">
+<div class="panel-padding">
+    <div id="ipc-name" class="status-name"></div>
+    <div id="ipc-status" class="status-state"></div>
+</div>
+</div>
+<!-- End Status -->
+
+<div class="flex-container">
+<div class="flex-column-l">
+
+<!-- Character Avatar -->
+<div class="align-c">
+<div id="ipc-exhibit" class="panel avatar-panel">
+    <img class="avatar-canvas-caption" src="icons/8-bit.png" />
+</div>
+
+<div class="panel avatar-panel">
+    <img class="avatar-canvas" src="icons/ipc-logo.svg" />
+</div>
+
+</div>
+<!-- End Character Avatar -->
+
+<!-- Economics Panel -->
+<div class="panel">
+<div class="panel-container align-c">
+
+<div class="eco-paragraph">
+    <span class="eco-label eco-label-margin-r">Born</span>
+    <span id="ipc-birth"></span>
+</div>
+<div class="eco-line">
+    <span class="eco-label">Price</span> <span id="ipc-price"></span> &nbsp;
+    <span class="eco-label">Gold</span> <span id="ipc-gold">0</span> &nbsp;
+    <span class="eco-label">XP</span> <span id="ipc-xp"></span>
+</div>
+
+<hr />
+
+<div class="eco-paragraph eco-label">Wallet Address</div>
+<div id="ipc-owner" class="eco-line"></div>
+
+</div>
+</div>
+<!-- /Economics Panel -->
+
+<!-- DNA Panel -->
+<div class="panel">
+<div class="panel-caption">DNA</div>
+<div class="panel-padding">
+<div class="row-table">
+    <div class="width-25">
+        <img id="ipc-elf-night" class="row-icon" src="race-symbols/symbol-elf-night.png" />
+        <img id="ipc-elf-wood" class="row-icon" src="race-symbols/symbol-elf-wood.png" />
+        <img id="ipc-elf-high" class="row-icon" src="race-symbols/symbol-elf-high.png" />
+        <img id="ipc-elf-sun" class="row-icon" src="race-symbols/symbol-elf-sun.png" />
+        <img id="ipc-elf-dark" class="row-icon" src="race-symbols/symbol-elf-dark.png" />
+
+        <img id="ipc-human-mythic" class="row-icon" src="race-symbols/symbol-human-mythic.png" />
+        <img id="ipc-human-nordic" class="row-icon" src="race-symbols/symbol-human-nordic.png" />
+        <img id="ipc-human-eastern" class="row-icon" src="race-symbols/symbol-human-eastern.png" />
+        <img id="ipc-human-coastal" class="row-icon" src="race-symbols/symbol-human-coastal.png" />
+        <img id="ipc-human-southern" class="row-icon" src="race-symbols/symbol-human-southern.png" />
+
+        <img id="ipc-dwarf-quarry" class="row-icon" src="race-symbols/symbol-dwarf-quarry.png" />
+        <img id="ipc-dwarf-mountain" class="row-icon" src="race-symbols/symbol-dwarf-mountain.png" />
+        <img id="ipc-dwarf-lumber" class="row-icon" src="race-symbols/symbol-dwarf-lumber.png" />
+        <img id="ipc-dwarf-hill" class="row-icon" src="race-symbols/symbol-dwarf-hill.png" />
+        <img id="ipc-dwarf-volcano" class="row-icon" src="race-symbols/symbol-dwarf-volcano.png" />
+
+        <img id="ipc-orc-ash" class="row-icon" src="race-symbols/symbol-orc-ash.png" />
+        <img id="ipc-orc-sand" class="row-icon" src="race-symbols/symbol-orc-sand.png" />
+        <img id="ipc-orc-plains" class="row-icon" src="race-symbols/symbol-orc-plains.png" />
+        <img id="ipc-orc-swamp" class="row-icon" src="race-symbols/symbol-orc-swamp.png" />
+        <img id="ipc-orc-blood" class="row-icon" src="race-symbols/symbol-orc-blood.png" />
+    </div>
+    <div class="width-37">
+    <div class="dna-column-padding">
+        <div class="dna-label">Race</div>
+        <div id="ipc-race" class="dna-item"></div>
+        <div class="dna-label">Gender</div>
+        <div id="ipc-gender" class="dna-item"></div>
+        <div class="dna-label">Skin Color</div>
+        <div id="ipc-skin-color" class="dna-item"></div>
+        <div class="dna-label">Eye Color</div>
+        <div id="ipc-eye-color" class="dna-item"></div>
+    </div>
+    </div>
+    <div class="width-37">
+        <div class="dna-label">Subrace</div>
+        <div id="ipc-subrace" class="dna-item"></div>
+        <div class="dna-label">Height</div>
+        <div id="ipc-height" class="dna-item"></div>
+        <div class="dna-label">Hair Color</div>
+        <div id="ipc-hair-color" class="dna-item"></div>
+        <div class="dna-label">Handedness</div>
+        <div id="ipc-handedness" class="dna-item"></div>
+    </div>
+</div>
+</div>
+</div>
+<!-- End DNA Panel -->
+
+</div>
+<div class="flex-column-r">
+
+<!-- Attribute Panel -->
+<div class="panel">
+<div class="panel-caption">Attributes</div>
+<div class="panel-padding">
+
+<div class="panel-padding-top row-table">
+    <div class="width-25">
+        <img class="row-icon" src="icons/strength-icon.png" />
+    </div>
+    <div class="width-50">
+        <div class="attributes-caption">Strength</div>
+        <div class="attributes-item">Force</div>
+        <div class="attributes-item">Sustain</div>
+        <div class="attributes-item">Tolerance</div>
+    </div>
+    <div class="width-25">
+        <div id="ipc-strength" class="attributes-caption"></div>
+        <div id="ipc-force" class="attributes-item"></div>
+        <div id="ipc-sustain" class="attributes-item"></div>
+        <div id="ipc-tolerance" class="attributes-item"></div>
+    </div>
+</div>
+
+<div class="row-table">
+    <div class="width-25">
+        <img class="row-icon" src="icons/dexterity-icon.png" />
+    </div>
+    <div class="width-50">
+        <div class="attributes-caption">Dexterity</div>
+        <div class="attributes-item">Speed</div>
+        <div class="attributes-item">Precision</div>
+        <div class="attributes-item">Reaction</div>
+    </div>
+    <div class="width-25">
+        <div id="ipc-dexterity" class="attributes-caption"></div>
+        <div id="ipc-speed" class="attributes-item"></div>
+        <div id="ipc-precision" class="attributes-item"></div>
+        <div id="ipc-reaction" class="attributes-item"></div>
+    </div>
+</div>
+
+<div class="row-table">
+    <div class="width-25">
+        <img class="row-icon" src="icons/intelligence-icon.png" />
+    </div>
+    <div class="width-50">
+        <div class="attributes-caption">Intelligence</div>
+        <div class="attributes-item">Memory</div>
+        <div class="attributes-item">Processing</div>
+        <div class="attributes-item">Reasoning</div>
+    </div>
+    <div class="width-25">
+        <div id="ipc-intelligence" class="attributes-caption"></div>
+        <div id="ipc-memory" class="attributes-item"></div>
+        <div id="ipc-processing" class="attributes-item"></div>
+        <div id="ipc-reasoning" class="attributes-item"></div>
+    </div>
+</div>
+
+<div class="row-table">
+    <div class="width-25">
+        <img class="row-icon" src="icons/constitution-icon.png" />
+    </div>
+    <div class="width-50">
+        <div class="attributes-caption">Constitution</div>
+        <div class="attributes-item">Healing</div>
+        <div class="attributes-item">Fortitude</div>
+        <div class="attributes-item">Vitality</div>
+    </div>
+    <div class="width-25">
+        <div id="ipc-constitution" class="attributes-caption"></div>
+        <div id="ipc-healing" class="attributes-item"></div>
+        <div id="ipc-fortitude" class="attributes-item"></div>
+        <div id="ipc-vitality" class="attributes-item"></div>
+    </div>
+</div>
+
+<div class="row-table panel-padding-bottom">
+    <div class="width-25">
+        <img class="row-icon" src="icons/luck-icon.png" />
+    </div>
+    <div class="width-50">
+        <div class="attributes-caption">Luck</div>
+    </div>
+    <div class="width-25">
+        <div id="ipc-luck" class="attributes-caption"></div>
+    </div>
+</div>
+
+</div>
+</div>
+<!-- End Attribute Panel -->
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="footer"></div>
+
+</form>
+
+<script> let IPC_BROWSER = 1; </script>
+<script src="lib/bluedream.js"></script>
+<script src="lib/ipc-eng.js"></script>
+<script src="lib/ipc-lib.js"></script>
+<script src="lib/ipc-canvas.js"></script>
+
+<script>
+
+document.getElementById("ipc-explorer").style.display = "none";
+ipc_explorer = ixp_main();
+
+function ixp_update_race_symbol(subrace)
+{
+    let table = [
+        "ipc-elf-night", // FIX!
+        "ipc-elf-night",
+        "ipc-elf-wood",
+        "ipc-elf-high",
+        "ipc-elf-sun",
+        "ipc-elf-dark",
+
+        "ipc-human-mythic",
+        "ipc-human-mythic",
+        "ipc-human-nordic",
+        "ipc-human-eastern",
+        "ipc-human-coastal",
+        "ipc-human-southern",
+
+        "ipc-dwarf-quarry",
+        "ipc-dwarf-quarry",
+        "ipc-dwarf-mountain",
+        "ipc-dwarf-lumber",
+        "ipc-dwarf-hill",
+        "ipc-dwarf-volcano",
+
+        "ipc-orc-ash",
+        "ipc-orc-ash",
+        "ipc-orc-sand",
+        "ipc-orc-plains",
+        "ipc-orc-swamp",
+        "ipc-orc-blood"
+    ];
+
+    let index = 0, element = null
+    for (; index < table.length; index++)
+    {
+        element = document.getElementById(table[index]);
+        if (element != null)
+            element.style.display = "none";
+    }
+
+    element = document.getElementById(table[subrace]);
+    if (element != null)
+        element.style.display = "inline-block";
+ 
+}
+
+function ixp_update_form(id, ipc)
+{
+    document.getElementById("ipc-name").innerHTML = "#"+id+" - "+ipc.name;
+
+    document.getElementById("ipc-birth").innerHTML = ipc.label_ipc.birth;
+    document.getElementById("ipc-price").innerHTML = "$"+ipc.label_ipc.price;
+    document.getElementById("ipc-xp").innerHTML = ipc.label_ipc.xp;
+    document.getElementById("ipc-owner").innerHTML = ipc.label_ipc.owner;
+
+    document.getElementById("ipc-race").innerHTML = ipc.label_ipc.race;
+    document.getElementById("ipc-subrace").innerHTML = ipc.label_ipc.subrace;
+    document.getElementById("ipc-gender").innerHTML = ipc.label_ipc.gender;
+    document.getElementById("ipc-height").innerHTML = ipc.label_ipc.height;
+    document.getElementById("ipc-skin-color").innerHTML = ipc.label_ipc.skin_color;
+    document.getElementById("ipc-hair-color").innerHTML = ipc.label_ipc.hair_color;
+    document.getElementById("ipc-eye-color").innerHTML = ipc.label_ipc.eye_color;
+    document.getElementById("ipc-handedness").innerHTML = ipc.label_ipc.handedness;
+
+    document.getElementById("ipc-strength").innerHTML = ipc.label_ipc.strength;
+    document.getElementById("ipc-force").innerHTML = ipc.label_ipc.force;
+    document.getElementById("ipc-sustain").innerHTML = ipc.label_ipc.sustain;
+    document.getElementById("ipc-tolerance").innerHTML = ipc.label_ipc.tolerance;
+
+    document.getElementById("ipc-dexterity").innerHTML = ipc.label_ipc.dexterity;
+    document.getElementById("ipc-speed").innerHTML = ipc.label_ipc.speed;
+    document.getElementById("ipc-precision").innerHTML = ipc.label_ipc.precision;
+    document.getElementById("ipc-reaction").innerHTML = ipc.label_ipc.reaction;
+
+    document.getElementById("ipc-intelligence").innerHTML = ipc.label_ipc.intelligence;
+    document.getElementById("ipc-memory").innerHTML = ipc.label_ipc.memory;
+    document.getElementById("ipc-processing").innerHTML = ipc.label_ipc.processing;
+    document.getElementById("ipc-reasoning").innerHTML = ipc.label_ipc.reasoning;
+
+    document.getElementById("ipc-constitution").innerHTML = ipc.label_ipc.constitution;
+    document.getElementById("ipc-healing").innerHTML = ipc.label_ipc.healing;
+    document.getElementById("ipc-fortitude").innerHTML = ipc.label_ipc.fortitude;
+    document.getElementById("ipc-vitality").innerHTML = ipc.label_ipc.vitality;
+
+    document.getElementById("ipc-luck").innerHTML = ipc.label_ipc.luck;
+    document.getElementById("ipc-status").innerHTML = "Last Updated: " + ipc.label_ipc.last_updated;
+
+    ixp_update_race_symbol(ipc.subrace);
+}
+
+async function ixp_get_ipc(database, id)
+{
+    id = ""+id;
+    if (id.match(/^\d+$/) == null)
+        return;
+
+    id = parseInt(id);
+    id--;
+
+    if (id < 0) return;
+    if (id >= 2828)
+        return;
+
+    // id++;
+
+    // result = await fetch("/ipc/token_id/"+id)
+    //    .then(res => res.json());
+
+    result = database[id];
+
+    console.log(result);
+
+    ipc = IPCLib.ipc_create_ipc_from_json(result);
+
+    // FIX
+    ipc.label_ipc = ipc_create_label_ipc(ipc, IPCEnglish);
+
+    document.getElementById("ipc-explorer").style.display = "block";
+    ixp_update_form(id + 1, ipc)
+
+    ixp_set_exhibit(ipc_explorer.r_exhibit[0], ipc);
+}
+
+async function main()
+{
+
+    let database = await fetch("database.json")
+        .then(responce => responce.json());
+
+    ixp_get_ipc(database, 1);
+
+    document.getElementsByTagName("form")[0]
+        .addEventListener("submit", (event) => {
+            event.preventDefault(); });
+
+    document.getElementById("ipc-search-textin")
+        .addEventListener("keyup", (event) => {
+
+        if (event.key === "Enter" || event.keyCode === 13)
+            ixp_get_ipc(database, event.target.value); 
+    });
+}
+
+main();
+
+</script>
+
+</body>
+</html>
